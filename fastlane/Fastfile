@@ -1,0 +1,78 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.28.3"
+
+default_platform :android
+
+platform :android do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "My awesome app"
+  lane :distribute do
+    gradle(task: "app:assembleDebug")
+    firebase_app_distribution(
+        app: "1:4167889254:android:385481f139d0c6f54258a7",
+        testers: "thanhnamitit@gmail.com, thanhnamdev@gmail.com",
+        release_notes: "Con voi to to ne",
+        firebase_cli_token: "1//0gTWvGrhUgvANCgYIARAAGBASNgF-L9IrEb4RkMtEdSeYT8umCz6pC2WkEvqsTgWEW8e458pxfrIBtMWirGy4o27ihKbc-tj4kg"
+    )
+  end
+
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "assembleRelease")
+    crashlytics
+
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "assembleRelease")
+    supply
+  end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is sent or shared. Learn more at https://github.com/fastlane/enhancer

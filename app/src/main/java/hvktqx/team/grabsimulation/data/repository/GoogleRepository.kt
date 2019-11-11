@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface GoogleRepository {
-    @GET("maps/api/directions/json?key=aaa")
+    @GET("maps/api/directions/json?key=x")
     fun getRoutes(
         @Query("origin") origin: String,
         @Query("destination") destination: String
