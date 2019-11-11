@@ -25,18 +25,5 @@ pipeline {
         archiveArtifacts '**/*.apk'
       }
     }
-    stage('Static analysis') {
-      steps {
-        // Run Lint and analyse the results
-        sh './gradlew lintDebug'
-        androidLint pattern: '**/lint-results-*.xml'
-      }
-    }
-  }
-  post {
-    failure {
-      // Notify developer team of the failure
-      mail to: 'android-devs@example.com', subject: 'Oops!', body: "Build ${env.BUILD_NUMBER} failed; ${env.BUILD_URL}"
-    }
   }
 }
