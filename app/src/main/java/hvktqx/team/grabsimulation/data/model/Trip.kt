@@ -6,8 +6,8 @@ import android.os.Parcelable.Creator
 import com.google.android.gms.maps.model.LatLng
 
 data class Trip(
-  val origin: LatLng,
-  val destination: LatLng,
+  val startLatLng: LatLng,
+  val endLatLng: LatLng,
   val duration: Long,
   val distance: Long,
   val startAddress: String,
@@ -26,8 +26,8 @@ data class Trip(
     parcel.readString()!!)
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
-    parcel.writeParcelable(origin, flags)
-    parcel.writeParcelable(destination, flags)
+    parcel.writeParcelable(startLatLng, flags)
+    parcel.writeParcelable(endLatLng, flags)
     parcel.writeLong(duration)
     parcel.writeLong(distance)
     parcel.writeString(startAddress)

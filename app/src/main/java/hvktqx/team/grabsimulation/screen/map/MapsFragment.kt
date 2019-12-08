@@ -107,8 +107,8 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
     val latLngs = PolyUtil.decode(trip.polyline)
     boundRoute(latLngs)
     googleMap.addPolyline(PolylineOptions().width(15.0f).color(Color.BLACK).addAll(latLngs))
-    googleMap.addMarker(genMarkerOption(trip.destination, R.drawable.ic_origin))
-    googleMap.addMarker(genMarkerOption(trip.origin, R.drawable.ic_destination))
+    googleMap.addMarker(genMarkerOption(trip.endLatLng, R.drawable.ic_origin))
+    googleMap.addMarker(genMarkerOption(trip.startLatLng, R.drawable.ic_destination))
 
     carsProvider.carsLatLng.observe(this, Observer {
       if (it.first != null && it.second != null) {
@@ -118,7 +118,7 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback {
   }
 
   private fun addCarMarker(latLngs: List<LatLng>, ratio: Long) {
-    val startLatLng = parentViewModel.trip.value?.origin
+    val startLatLng = parentViewModel.trip.value?.startLatLng
     if (startLatLng != null) {
       carMarkers.forEach { it.remove() }
       carMarkers.clear()

@@ -6,12 +6,12 @@ import hvktqx.team.grabsimulation.data.repository.GoogleRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetRouteUseCase @Inject constructor(
+class GetTripUseCase @Inject constructor(
   private val repository: GoogleRepository,
   private val priceProvider: PriceProvider
 ) {
-  operator fun invoke(originId: String, destinationId: String): Observable<Trip> {
-    return repository.getRoutes("place_id:$originId", "place_id:$destinationId").map {
+  operator fun invoke(startId: String, endId: String): Observable<Trip> {
+    return repository.getRoutes("place_id:$startId", "place_id:$endId").map {
       it.routes.first().let { route ->
         route.legs.first().let { leg ->
           Trip(

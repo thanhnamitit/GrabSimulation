@@ -27,8 +27,8 @@ class FirebaseModule {
       override fun onDataChange(dataSnapshot: DataSnapshot) {
         Log.i("databasechange", dataSnapshot.toString())
 
-        val price = dataSnapshot.getValue(Long::class.java)
-        price?.let { provider.price = it }
+        val newPrice = dataSnapshot.getValue(Long::class.java)
+        newPrice?.let { provider.price = it }
       }
 
       override fun onCancelled(p0: DatabaseError) {

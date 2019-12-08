@@ -9,7 +9,7 @@ import hvktqx.team.grabsimulation.base.BaseViewModel
 import hvktqx.team.grabsimulation.data.model.Spot
 import hvktqx.team.grabsimulation.data.model.Trip
 import hvktqx.team.grabsimulation.data.usecase.FetchPredictionPlacesUseCase
-import hvktqx.team.grabsimulation.data.usecase.GetRouteUseCase
+import hvktqx.team.grabsimulation.data.usecase.GetTripUseCase
 import hvktqx.team.grabsimulation.functional.OneTimeValue
 import hvktqx.team.grabsimulation.functional.Wrapper
 import io.reactivex.Observable
@@ -27,7 +27,7 @@ data class LocationInputState(
 class LocationInputViewModel @AssistedInject constructor(
   @Assisted initialState: LocationInputState,
   private val fetchPredictionPlaces: FetchPredictionPlacesUseCase,
-  private val getRouteUseCase: GetRouteUseCase
+  private val getRouteUseCase: GetTripUseCase
 ) : BaseViewModel<LocationInputState>(initialState) {
   val TAG = "LocationInputViewModel"
 

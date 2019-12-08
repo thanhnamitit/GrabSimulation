@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Directions(val routes: Array<Route>, val status: String) {
+class Routes(val routes: Array<Route>, val status: String) {
 
     class Route(
         @SerializedName("overview_polyline") val overviewPolyline: OverviewPolyline,

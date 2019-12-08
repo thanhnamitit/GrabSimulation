@@ -1,6 +1,6 @@
 package hvktqx.team.grabsimulation.data.repository
 
-import hvktqx.team.grabsimulation.data.model.Directions
+import hvktqx.team.grabsimulation.data.model.Routes
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -8,8 +8,8 @@ import retrofit2.http.Query
 interface GoogleRepository {
     @GET("maps/api/directions/json?key=xx")
     fun getRoutes(
-        @Query("origin") origin: String,
-        @Query("destination") destination: String
+        @Query("startLatLng") origin: String,
+        @Query("endLatLng") destination: String
     )
-            : Observable<Directions>
+            : Observable<Routes>
 }
